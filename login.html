@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Login</title>
+   <!-- Font Awesome for Icons -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+</head>
+<body style="font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f3e5f5;">
+
+<section style="background-color: #ffffff; padding: 30px; border-radius: 15px; box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); width: 100%; max-width: 400px; text-align: center;">
+   <form id="MainForm">
+      <h3 style="color: #670f75; font-size: 24px; margin-bottom: 20px;">Log In now</h3>
+     
+      <p style="text-align: left; font-size: 14px; color: #333;">your email <span style="color: #670f75;">*</span></p>
+      <input type="email" id="emailInp" placeholder="enter your email" required maxlength="50" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; transition: all 0.3s ease;">
+
+      <p style="text-align: left; font-size: 14px; color: #333;">your password <span style="color: #670f75;">*</span></p>
+      <input type="password" id="passwordInp" placeholder="enter your password" required maxlength="20" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; transition: all 0.3s ease;">
+      
+      <button type="submit" style="background-color: #670f75; color: #fff; border: none; padding: 10px 20px; margin-top: 15px; cursor: pointer; border-radius: 8px; font-size: 16px; transition: background-color 0.3s ease, transform 0.2s ease; width: 100%;">Log In</button>
+      
+      <a href="./register.html" style="display: inline-block; margin-top: 15px;">
+         <button type="button" style="background-color: #670f75; color: #fff; border: none; padding: 10px 20px; cursor: pointer; border-radius: 8px; font-size: 16px; transition: background-color 0.3s ease, transform 0.2s ease; width: 100%;">Sign Up</button>
+      </a>
+   </form>
+</section>
+
+</body>
+</html>
+
+<script type="module">
+   
+   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+   import { getDatabase, get, ref, child } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+   import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+  
+   const firebaseConfig = {
+     apiKey: "AIzaSyAcpEmcTudx--IRQfmpbtdBuCUsOK0VK4U",
+     authDomain: "knowledge-kite-d82ee.firebaseapp.com",
+     databaseURL: "https://knowledge-kite-d82ee-default-rtdb.firebaseio.com",
+     projectId: "knowledge-kite-d82ee", 
+     storageBucket: "knowledge-kite-d82ee.appspot.com",
+     messagingSenderId: "470751016632",
+     appId: "1:470751016632:web:ae145dffb69a980147e64d"
+   };
+ 
+   
+   const app = initializeApp(firebaseConfig);
+   const db = getDatabase();
+   const auth = getAuth(app);
+   const dbref = ref(db);
+
+   let EmailInp = document.getElementById('emailInp');
+   let PasswordlInp = document.getElementById('passwordInp');
+   let MainForm = document.getElementById('MainForm');
+
+
+   let SignInUser = evt => {
+      evt.preventDefault();
+
+      signInWithEmailAndPassword(auth, EmailInp.value, PasswordlInp.value)
+      .then((credentials)=>{
+         console.log(credentials);
+         get(child(dbref, 'UsersAuthList/' + credentials.user.uid)).then((snapshot)=>{
+            if(snapshot.exists){
+               sessionStorage.setItem("user-info", JSON.stringify({
+                  fname: snapshot.val().fname,
+                  lname: snapshot.val().lname,
+                  number: snapshot.val().number,
+                  email: snapshot.val().email
+               }))
+               sessionStorage.setItem("user-creds", JSON.stringify(credentials.user));
+               window.location.href = './index.html';
+               
+            }
+         })
+      })
+      .catch((error)=>{
+         alert(error.message);
+         console.log(error.code);
+         console.log(error.message);
+      })
+   }
+
+   MainForm.addEventListener('submit', SignInUser);
+
+ </script>
+
+
+
+
+
+
+<!-- custom js file link  -->
+<!-- <script src="./js/script.js"></script> -->
+
+   
+</body>
+</html>

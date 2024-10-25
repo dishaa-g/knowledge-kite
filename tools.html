@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>courses</title>
+   <link rel="stylesheet" href="./tools.css">
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="./index.html" class="logo">Knowledge Kite</a>
+
+      <!-- <form action="search.html" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form> -->
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="images/pic-1.jpg" class="image" alt="">
+         <h3 class="name">Disha Gupta</h3>
+         <p class="role">student</p>
+         <a href="profile.html" class="btn">view profile</a>
+         <div class="flex-btn">
+            <button id ="signoutbutton" type="button" class="option-btn">Sign Out</button>
+
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="images/pic-1.jpg" class="image" alt="">
+      <h3 class="name">Disha Gupta</h3>
+      <p class="role">student</p>
+      <a href="profile.html" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+      <a href="./index.html"><i class="fas fa-home"></i><span>home</span></a>
+      <a href="about.html"><i class="fas fa-question"></i><span>about</span></a>
+      <a href="tools.html"><i class="fas fa-tools"></i><span>tools</span></a>
+      <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+      <a href="teachers.html"><i class="fas fa-chalkboard-user"></i><span>faculty review</span></a>
+      <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
+   </nav>
+
+</div>
+
+<section class="courses">
+
+   <h1 class="heading">our tools</h1>
+
+   <div class="box-container">
+      
+      <div class="box">
+         <div class="thumb">
+            <img src="images\tu41bt2q.png" alt="">
+            
+         </div>
+         <h3 class="title">Resume Builder Application <br> <span>Build your Resume / CV easily with this application and download it for absolutely free !</span></h3>
+         <a href="./resume builder/index.html" class="inline-btn">Explore!</a>
+      </div>
+
+      <div class="box">
+         <div class="thumb">
+            <img src="https://miro.medium.com/v2/resize:fit:598/1*7ZwRpQpBJA_RGETUvvknJQ.jpeg" alt="">
+            
+         </div>
+         <h3 class="title">Quiz Application <br> <span>Test your learning and get the better understanding of your knowledge!</span></h3>
+         <a href="./quizzes.html" class="inline-btn">Explore!</a>
+      </div>
+
+      <div class="box">
+         <div class="thumb">
+            <img src="https://media.istockphoto.com/vectors/clipboard-check-list-marks-with-pen-illustration-vector-id1141501330?k=6&m=1141501330&s=170667a&w=0&h=-5C60qs6qm96SYphNi6oBL7Ma_IM5Px562SeiygDniU=" alt="">
+            
+         </div>
+         <h3 class="title">To Do list Application <br> <span>Manage your Time precisely with our to do list! keep a track of your daily tasks and ace your day!</span></h3>
+         <a href="./to-do-list/TODO list/todolist.html" class="inline-btn">Explore!</a>
+      </div>
+
+      <div class="box">
+         <div class="thumb">
+            <img src="https://th.bing.com/th/id/OIP.W-ZjWIdjJ-ppuEWzHbhj8AHaLG?w=500&h=749&rs=1&pid=ImgDetMain" alt="">
+            
+         </div>
+         <h3 class="title">Previous Year Questions Papers <br> <span>Practise these papers and ace your examinations by scoring 100!</span></h3>
+         <a href="https://papers-vitb.vercel.app/" class="inline-btn">Explore!</a>
+      </div>
+
+      <div class="box">
+         <div class="thumb">
+            <img src="https://th.bing.com/th/id/OIP.P7GRkBz_BflYGrnj3TKo6wHaHa?pid=ImgDet&w=474&h=474&rs=1" alt="">
+            
+         </div>
+         <h3 class="title">Notes Application <br> <span>Store all your notes in one place ! Dont worry your notes wont go away when you do!</span></h3>
+         <a href="https://www.onenote.com/" class="inline-btn">Explore!</a>
+      </div>
+      <div class="box">
+         <div class="thumb">
+            <img src="data:image/png;base64,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" alt="">
+            
+         </div>
+         <h3 class="title">Course Review Section <br> <span>Get a brief knowledge about your courses and be a master of your domain!</span></h3>
+         <a href="https://www.coursera.org/" class="inline-btn">Explore!</a>
+      </div>
+
+     
+         
+   </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+
+   &copy; copyright @ 2024 by <span>Group 64</span> | all rights reserved!
+
+</footer>
+
+<!-- custom js file link  -->
+<script src="./js/script.js"></script>
+
+   
+</body>
+</html>

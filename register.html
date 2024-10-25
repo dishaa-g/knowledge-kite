@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Register</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- Custom inline CSS for styling -->
+   <style>
+      body {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         height: 100vh;
+         margin: 0;
+         font-family: Arial, sans-serif;
+         background: linear-gradient(135deg, #670f75, #8e44ad);
+      }
+
+      .form-container {
+         background-color: #fff;
+         padding: 20px;
+         border-radius: 10px;
+         width: 100%;
+         max-width: 400px;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+         text-align: center;
+      }
+
+      h3 {
+         font-size: 1.8em;
+         margin-bottom: 20px;
+         color: #333;
+      }
+
+      .form-container p {
+         font-size: 1em;
+         color: #555;
+         text-align: left;
+         margin: 0;
+      }
+
+      .form-container p span {
+         color: #ff4757;
+      }
+
+      .box {
+         width: 100%;
+         padding: 10px;
+         margin: 10px 0 20px;
+         font-size: 1em;
+         border: 1px solid #ccc;
+         border-radius: 5px;
+         outline: none;
+         transition: all 0.3s ease;
+      }
+
+      .box:focus {
+         border-color: #66a6ff;
+         box-shadow: 0 0 5px rgba(102, 166, 255, 0.5);
+      }
+
+      .inline-btn {
+         display: inline-block;
+         width: 100%;
+         padding: 10px;
+         font-size: 1em;
+         color: #fff;
+         background:#8e44ad;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+         transition: background 0.3s ease;
+         margin-bottom: 10px;
+      }
+
+      .inline-btn:hover {
+         background: #8e44ad;
+      }
+
+      .inline-btn:last-child {
+         background: #a30b85;
+      }
+
+      .inline-btn:last-child:hover {
+         background: #b552a1;
+      }
+   </style>
+</head>
+<body>
+
+<section class="form-container">
+   <form id="MainForm">
+      <h3>Register Now!</h3>
+      <p>Your First Name <span>*</span></p>
+      <input type="text" id="fnameInp" placeholder="Enter your first name" required maxlength="50" class="box">
+      
+      <p>Your Last Name <span>*</span></p>
+      <input type="text" id="lnameInp" placeholder="Enter your last name" required maxlength="50" class="box">
+      
+      <p>Your Phone Number <span>*</span></p>
+      <input type="number" id="numberInp" placeholder="Enter your phone number" required maxlength="10" class="box">
+      
+      <p>Your Email <span>*</span></p>
+      <input type="email" id="emailInp" placeholder="Enter your email" required maxlength="50" class="box">
+      
+      <p>Your Password <span>*</span></p>
+      <input type="password" id="passwordInp" placeholder="Enter your password" required maxlength="20" class="box">
+      
+      <button class="inline-btn" type="submit">Register</button>
+      <a href="./login.html"> <button type="button" class="inline-btn">Sign In</button></a>
+   </form>
+</section>
+
+</body>
+</html>
+
+
+
+
+<script type="module">
+   
+   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+   import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+   import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+  
+   const firebaseConfig = {
+     apiKey: "AIzaSyAcpEmcTudx--IRQfmpbtdBuCUsOK0VK4U",
+     authDomain: "knowledge-kite-d82ee.firebaseapp.com",
+     databaseURL: "https://knowledge-kite-d82ee-default-rtdb.firebaseio.com",
+     projectId: "knowledge-kite-d82ee",
+     storageBucket: "knowledge-kite-d82ee.appspot.com",
+     messagingSenderId: "470751016632",
+     appId: "1:470751016632:web:ae145dffb69a980147e64d"
+   };
+ 
+   
+   const app = initializeApp(firebaseConfig);
+   const db = getDatabase();
+   const auth = getAuth(app);
+
+   let FirstNameInp = document.getElementById('fnameInp');
+   let LastNameInp = document.getElementById('lnameInp');
+   let NumberInp = document.getElementById('numberInp');
+   let EmailInp = document.getElementById('emailInp');
+   let PasswordlInp = document.getElementById('passwordInp');
+   let MainForm = document.getElementById('MainForm');
+
+
+   let RegisterUser = evt => {
+      evt.preventDefault();
+
+      createUserWithEmailAndPassword(auth, EmailInp.value, PasswordlInp.value)
+      .then((credentials)=>{
+         set(ref(db, 'UsersAuthList/'+ credentials.user.uid),{
+            fname: FirstNameInp.value,
+            lname: LastNameInp.value,
+            number: NumberInp.value,
+            email: EmailInp.value
+         })
+         alert("REGISTER SUCCESSFULLY!")
+         console.log(credentials);
+
+      })
+      .catch((error)=>{
+         alert(error.message);
+         console.log(error.code);
+         console.log(error.message);
+      })
+   }
+
+   MainForm.addEventListener('submit', RegisterUser);
+
+ </script>
+
+
+
+<!-- <script type="module" defer src="./js/register.js"></script> -->
+<!-- custom js file link  -->
+<!-- <script src="./js/script.js"></script> -->
+
+   
+</body>
+</html>
